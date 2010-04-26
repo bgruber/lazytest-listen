@@ -10,15 +10,15 @@ monitored, and if you're talking to me that means an *auditory display*.
 software development tasks, like debugging. Maybe I'll put some
 citations here.)
 
-Two displays are provided, except by two I mean one because only the
-first one is implemented. The first plays an annoying whine at a
+Two displays are provided. The first plays an annoying whine at a
 volume proportional to the fraction of tests which are failing. The
 second plays a continuous chord which will grow more or less dissonant
 in proportion to the same.
 
 Using
 -----
-This only works with lazytest tests. Also, I would not do this with
+
+This only works with lazytest tests. Also, I would not try this with
 headphones on.
 
     (require '(com.iheardata.lazytest-listen [volume :as llv]))
@@ -32,6 +32,9 @@ headphones on.
     
     ;; stop it
     (send listen-agent llv/stop)`
+
+For the harmonic display, just use the
+`com.iheardata.lazytest-listen.harmony` namespace instead of `volume`.
 
 Notes
 -----
