@@ -30,7 +30,7 @@
   (assoc state :ci ci))
 
 (defn stop [state]
-  (.close (:synth state))
+  (stop-synth (:synth state))
   (send (:watch-dir-agent state) lw/stop)
   state)
 

@@ -21,7 +21,7 @@
 
 (defn stop [state]
   (let [{:keys [synth watch-dir-agent]} state]
-    (.close synth)
+    (stop-synth synth)
     (send watch-dir-agent lw/stop))
   state)
 
