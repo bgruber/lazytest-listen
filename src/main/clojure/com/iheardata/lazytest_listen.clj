@@ -1,5 +1,5 @@
 (ns com.iheardata.lazytest-listen
-  (:require [com.stuartsierra.lazytest [report :as lr]]))
+  (:require [lazytest.results :as lr]))
 
 (defn get-channel [synth channel]
   (aget (.getChannels synth) channel))
@@ -9,5 +9,5 @@
   (.close synth))
 
 (defn fraction-failed [r]
-  (let [{:keys [assertions fail]} (lr/summary r)]
-    (/ fail assertions)))
+  (let [{:keys [total fail]} (lr/summarize r)]
+    (/ fail total)))
