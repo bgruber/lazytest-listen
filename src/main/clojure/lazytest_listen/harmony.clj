@@ -1,14 +1,14 @@
 (ns lazytest-listen.harmony
   (:require [com.stuartsierra.lazytest [watch :as lw]])
   (:use [com.iheardata.lazytest-listen]
-	[clojure.set :only (difference)])
+        [clojure.set :only (difference)])
   (:import [javax.sound.midi MidiSystem]))
 
 (def chords [#{48 55 64 72}
-	     #{48 55 64 71}
-	     #{48 55 63 71}
-	     #{48 54 63 71}
-	     #{48 54 63 67 71}])
+             #{48 55 64 71}
+             #{48 55 63 71}
+             #{48 54 63 71}
+             #{48 54 63 67 71}])
 
 (def prog 69)
 (def init-vol 15)
@@ -21,7 +21,7 @@
    new-pitches are sets of integers representing MIDI pitches."
   [old-pitches new-pitches note-on-velocity channel]
   (doseq [pitch (difference old-pitches new-pitches)]
-		 (.noteOff channel pitch))
+    (.noteOff channel pitch))
   (doseq [pitch (difference new-pitches old-pitches)]
     (.noteOn channel pitch note-on-velocity)))
 
@@ -36,19 +36,19 @@
 
 (defn listen-spec [d & options]
   (let [synth (MidiSystem/getSynthesizer)
-	agnt (agent {})
-	watch-dir-agent (apply lw/watch-spec
-			       d
-			       :reporter #(send agnt
-						change-chord
-						(Math/round (* 4.0 (fraction-failed %))))
-			       options)]
+        agnt (agent {})
+        watch-dir-agent (apply lw/watch-spec
+                               d
+                               :reporter #(send agnt
+                                                change-chord
+                                                (Math/round (* 4.0 (fraction-failed %))))
+                               options)]
     (.open synth)
     (let [chan (get-channel synth 0)]
       (.programChange chan prog)
       (.controlChange chan 7 init-vol)
       (doseq [p (chords 0)] (.noteOn chan p velocity)))    
     (send agnt #(assoc %
-		  :synth synth
-		  :watch-dir-agent watch-dir-agent
-		  :ci 0))))
+                  :synth synth
+                  :watch-dir-agent watch-dir-agent
+                  :ci 0))))
