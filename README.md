@@ -19,22 +19,16 @@ Using
 -----
 
 This only works with lazytest tests. Also, I would not try this with
-headphones on.
+headphones on. The interface is the same as that for
+lazytest.watch. At a REPL:
 
-    (require '(com.iheardata.lazytest-listen [volume :as llv]))
-    
-    ;; start it up
-    (def listen-agent (llv/listen-spec "path/to/src"))
-    
-    ;; you should hear a short tone to indicate that things have
-    ;; started, followed by silence if all of your tests pass. Whenever you
-    ;; have failing tests, you will hear an annoying whine.
-    
-    ;; stop it
-    (send listen-agent llv/stop)`
+    (use 'lazytest-listen.volume)
+    (start ["path/to/src"])
 
-For the harmonic display, just use the
-`com.iheardata.lazytest-listen.harmony` namespace instead of `volume`.
+Stop it by hitting CTRL-C.
+
+For the harmonic display, just use the `lazytest-listen.harmony`
+namespace instead of `lazytest-listen.volume`.
 
 Notes
 -----
@@ -50,3 +44,11 @@ javax.sound.midi dishes up. That should probably be the built-in java
 soft-synth. On Ubuntu (and maybe other linux distros), you're going to
 want to make sure you're using OpenJDK, as the sound setup for the sun
 jdk is not pulseaudio-friendly.
+
+Stuart has eliminated the ability to stop watching in any way other
+than killing the process. That means there's no way to shut off any
+notes and close the synthesizer when you're done. Not doing that is
+fine if you are using the built-in Java synthesizer, because when the
+java process terminates, so does the synth. However, if you are
+hardcore and are using this with an external MIDI synth, you will
+probably get stuck notes.
