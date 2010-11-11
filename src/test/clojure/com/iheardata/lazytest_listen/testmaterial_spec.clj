@@ -1,8 +1,12 @@
 (ns com.iheardata.lazytest-listen.testmaterial-spec
-  (:use com.stuartsierra.lazytest)
-  (:use com.iheardata.lazytest-listen.testmaterial))
+  (:use [lazytest.describe :only (describe it)]))
 
-(describe *ns* "Sample tests"
-	  (is (= 10 (twice 5)))
-	  (is (= -2 (twice -1)))
-	  (is (= 0 (twice 0))))
+(defn twice [i] (+ i i))
+
+(describe twice "Sample tests"
+	  (it "can double a positive integer"
+       (= 10 (twice 5)))
+	  (it "can double a negative integer"
+          (= -2 (twice -1)))
+	  (it "can double 0"
+          (= 0 (twice 0))))
