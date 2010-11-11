@@ -1,5 +1,5 @@
-(ns com.iheardata.lazytest-listen.volume
-  (:use [com.iheardata.lazytest-listen])
+(ns lazytest-listen.volume
+  (:use [lazytest-listen])
   (:require [com.stuartsierra.lazytest [watch :as lw]])
   (:import [javax.sound.midi MidiSystem]))
 

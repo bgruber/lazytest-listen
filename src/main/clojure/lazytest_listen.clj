@@ -1,4 +1,4 @@
-(ns com.iheardata.lazytest-listen
+(ns lazytest-listen
   (:require [lazytest.results :as lr]))
 
 (defn get-channel [synth channel]

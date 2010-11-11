@@ -1,4 +1,4 @@
-(ns com.iheardata.lazytest-listen.testmaterial-spec
+(ns lazytest-listen.tests
   (:use [lazytest.describe :only (describe it)]))
 
 (defn twice [i] (+ i i))

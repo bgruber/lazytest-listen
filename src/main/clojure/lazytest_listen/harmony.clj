@@ -1,4 +1,4 @@
-(ns com.iheardata.lazytest-listen.harmony
+(ns lazytest-listen.harmony
   (:require [com.stuartsierra.lazytest [watch :as lw]])
   (:use [com.iheardata.lazytest-listen]
 	[clojure.set :only (difference)])
