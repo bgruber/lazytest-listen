@@ -1,1 +1,5 @@
-target/*
+pom.xml
+*jar
+lib
+classes
+
