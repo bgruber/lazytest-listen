@@ -11,7 +11,7 @@
              #{48 54 63 67 71}])
 
 (def prog 69)
-(def init-vol 15)
+(def init-vol 127)
 (def velocity 127)
 
 (defn midi-transition
